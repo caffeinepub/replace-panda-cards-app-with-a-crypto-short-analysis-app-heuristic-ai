@@ -1,0 +1,216 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Crypto Short-Analysis Terminal (heuristic AI) — Frontend Replacement",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Replace Panda Cards UI with a crypto short-analysis app UI and English-only copy.",
+      "acceptanceCriteria": [
+        "App no longer shows panda card collection, random card modal, or panda-specific copy.",
+        "Primary navigation/header branding reflects the new crypto short-analysis purpose.",
+        "All visible text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Replace the Panda Cards layout (CardGrid/RandomCardModal) with a single crypto analysis experience container component (e.g., CryptoShortAnalysisPage) and ensure only the new crypto-focused UI is rendered."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Replace Panda Cards branding and the Random Card CTA with crypto short-analysis branding, logo/icon rendering, and navigation to analysis/history sections. Use shadcn/ui components (e.g., Button) for consistent header controls. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Remove panda/caffeine.ai-specific copy and replace with app-appropriate footer copy in English (and include the financial disclaimer per REQ-6)."
+        },
+        {
+          "path": "frontend/src/components/CardGrid.tsx",
+          "operation": "delete",
+          "description": "Remove panda card grid UI to ensure the app no longer exposes the collectible cards experience."
+        },
+        {
+          "path": "frontend/src/components/PandaCardComponent.tsx",
+          "operation": "delete",
+          "description": "Remove panda card rendering component to avoid panda-specific UI/copy and assets usage."
+        },
+        {
+          "path": "frontend/src/components/RandomCardModal.tsx",
+          "operation": "delete",
+          "description": "Remove random panda card modal to satisfy removal of panda-specific functionality and UI."
+        },
+        {
+          "path": "frontend/src/store/randomCardStore.ts",
+          "operation": "delete",
+          "description": "Remove zustand store used only by the random panda card modal workflow."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Replace panda-card React Query hooks with crypto-analysis hooks used by the new analysis workflow and history UI (see REQ-5)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Create an analysis workflow UI for asset identifier + pasted OHLCV/CSV data that validates input and displays a recommendation with transparent score breakdown.",
+      "acceptanceCriteria": [
+        "There is a dedicated analysis form with inputs for asset identifier and pasted OHLCV/CSV data.",
+        "User can trigger an analysis and see a result panel with: recommendation (e.g., “Consider Short” / “Avoid Short”), overall confidence/score, and a breakdown of contributing signals.",
+        "The UI validates that the pasted data is parseable and shows a clear English error message when invalid."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "operation": "create",
+          "description": "Create the main analysis page component that composes: analysis form, result panel, and history section (REQ-5) in a readable terminal-style layout. Use shadcn/ui building blocks (Card, Tabs, Separator, etc.) where appropriate. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/analysis/AnalysisForm.tsx",
+          "operation": "create",
+          "description": "Create a dedicated form with (1) asset identifier input and (2) multiline pasted OHLCV/CSV text area, plus a primary “Run Analysis” action. Use shadcn/ui Input/Textarea/Button/Form patterns for accessible validation UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+          "operation": "create",
+          "description": "Create a result panel that renders: recommendation label, overall score/confidence, and a structured breakdown of contributing signals/reasons returned by the backend (English). Use shadcn/ui Card/Badge/Alert for hierarchy. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/utils/ohlcvParser.ts",
+          "operation": "create",
+          "description": "Add a CSV/OHLCV text parsing utility that validates rows/columns, supports common delimiters, produces a normalized series for submission, and returns user-friendly English error messages when invalid/unparseable."
+        },
+        {
+          "path": "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "operation": "modify",
+          "description": "Wire AnalysisForm submit to parse/validate pasted data (using ohlcvParser) before calling the analysis mutation; surface parsing errors inline in English."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Connect the analysis workflow to the backend using React Query hooks, with loading/error/empty states and a per-user analysis history view with detail viewing.",
+      "acceptanceCriteria": [
+        "Running an analysis shows a loading state, then renders the returned result.",
+        "Errors from backend are surfaced in a readable English message.",
+        "A history section lists prior analyses (asset, timestamp, recommendation/score) and allows viewing details."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/backend.d.ts",
+          "operation": "modify",
+          "description": "Update the frontend backend type declarations to reflect the new crypto analysis capabilities (submit analysis, list caller history, fetch analysis by id) and result types needed by the UI (recommendation, score/confidence, reasons/breakdown)."
+        },
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Implement React Query hooks analogous to the existing pattern, but for crypto analysis: runAnalysis mutation, listAnalysisHistory query, and getAnalysisById query; include ergonomic error handling for surfacing readable English messages in the UI."
+        },
+        {
+          "path": "frontend/src/components/analysis/AnalysisHistory.tsx",
+          "operation": "create",
+          "description": "Create a history section UI that lists prior analyses (asset, timestamp, recommendation/score) with loading/error/empty states. Use shadcn/ui Table/Skeleton/Alert/Dialog (or equivalent) to support detail viewing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/analysis/AnalysisDetailsDialog.tsx",
+          "operation": "create",
+          "description": "Create a detail view (dialog or expandable panel) that fetches and displays a selected past analysis using the getAnalysisById hook, including score breakdown/reasons. Use shadcn/ui Dialog components for accessibility. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "operation": "modify",
+          "description": "Wire the page to use the new React Query hooks: show analysis mutation pending state, render AnalysisResultPanel on success, show readable English error UI on failure, and render AnalysisHistory with selection -> AnalysisDetailsDialog."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Add a prominent informational-only / not-financial-advice disclaimer in the main analysis experience.",
+      "acceptanceCriteria": [
+        "Disclaimer text is visible in the main analysis experience (e.g., near results and/or footer).",
+        "Disclaimer is written in clear English and does not claim guaranteed outcomes."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Disclaimer.tsx",
+          "operation": "create",
+          "description": "Create a reusable disclaimer component with clear English copy stating the app is informational only and not financial advice. Use shadcn/ui Alert (or similar) styling for prominence. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "operation": "modify",
+          "description": "Render the Disclaimer component prominently near the analysis results area (and/or above the form) so it is visible during the main workflow."
+        },
+        {
+          "path": "frontend/src/components/Footer.tsx",
+          "operation": "modify",
+          "description": "Include a secondary instance or shortened version of the disclaimer in the footer to keep it visible across the experience."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Adopt a dark trading-terminal theme with neutral grays and neon green/amber accents, consistent typography, and clear hierarchy across analysis + history.",
+      "acceptanceCriteria": [
+        "Header, buttons, and key metric highlights follow the new terminal-style palette (no dominant pink/purple/blue gradients).",
+        "Layouts prioritize readability of tables/metrics and analysis results.",
+        "Theme is applied consistently across analysis form, results, and history views."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global theme CSS variables to shift from the collectible pink/purple/blue palette to a terminal palette (neutral grays + neon green/amber accents). Remove/replace pink/purple/blue glow utility classes so they no longer drive the UI."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust extended Tailwind theme settings (e.g., boxShadow glow tokens) to match the new neon green/amber terminal aesthetic and ensure consistency with updated CSS variables."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Update header styling to match terminal aesthetic (no gradient logo background/copy), emphasizing readability and key actions."
+        },
+        {
+          "path": "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+          "operation": "modify",
+          "description": "Apply terminal-style metric hierarchy (e.g., neon green for favorable short signals, amber for caution) using existing Tailwind tokens so result highlights are clear and consistent. Use shadcn/ui primitives for consistent typography and spacing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/analysis/AnalysisHistory.tsx",
+          "operation": "modify",
+          "description": "Ensure history list/table styling fits the terminal aesthetic with strong readability for timestamps, scores, and recommendation labels. Use shadcn/ui table/typography primitives. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Add new static brand assets (logo + icon) under frontend/public/assets/generated and render them in the UI.",
+      "acceptanceCriteria": [
+        "New generated images are added under frontend/public/assets/generated and referenced directly in the UI.",
+        "Header displays the new logo/icon at appropriate sizes without layout shift."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/crypto-short-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated logo asset as a static file at frontend/public/assets/generated/crypto-short-logo.dim_512x512.png and ensure it is committed for direct frontend use (no backend storage)."
+        },
+        {
+          "path": "frontend/public/assets/generated/crypto-short-icon.dim_128x128.png",
+          "operation": "create",
+          "description": "Add the generated icon asset as a static file at frontend/public/assets/generated/crypto-short-icon.dim_128x128.png and ensure it is committed for direct frontend use (no backend storage)."
+        },
+        {
+          "path": "frontend/src/components/Header.tsx",
+          "operation": "modify",
+          "description": "Render the new brand assets from frontend/public/assets/generated/crypto-short-logo.dim_512x512.png and/or frontend/public/assets/generated/crypto-short-icon.dim_128x128.png in the header with fixed dimensions to prevent layout shift. Use shadcn/ui layout primitives as needed. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

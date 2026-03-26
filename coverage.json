@@ -1,0 +1,188 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-16T03:22:32.811Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 8,
+    "implemented": 6,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Replace the current “Panda Cards” product UI with a new app focused on analyzing cryptocurrencies for potential short opportunities, using English for all user-facing text.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/CardGrid.tsx",
+          "frontend/src/components/PandaCardComponent.tsx",
+          "frontend/src/components/RandomCardModal.tsx",
+          "frontend/src/store/randomCardStore.ts",
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/Footer.tsx",
+          "frontend/src/components/CardGrid.tsx",
+          "frontend/src/components/PandaCardComponent.tsx",
+          "frontend/src/components/RandomCardModal.tsx",
+          "frontend/src/store/randomCardStore.ts",
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Create a new analysis workflow UI where a user can (a) enter a crypto identifier (e.g., symbol/name), (b) provide market data as pasted OHLCV rows or CSV text, and (c) run an analysis to produce a short/avoid short recommendation with a transparent score breakdown.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "frontend/src/components/analysis/AnalysisForm.tsx",
+          "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+          "frontend/src/utils/ohlcvParser.ts",
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "frontend/src/components/analysis/AnalysisForm.tsx",
+          "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+          "frontend/src/utils/ohlcvParser.ts",
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Implement backend data models and endpoints for crypto analysis requests and results, including storing a per-user analysis history (keyed by caller principal) and returning the user’s past analyses.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Implement the “AI analyze” logic as an on-canister heuristic scoring engine (no external LLM): compute common technical indicators from the provided OHLCV series (at minimum RSI and moving averages) and derive a short-opportunity score plus human-readable reasons.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Connect the new frontend workflow to the backend using React Query (new hooks analogous to the existing query patterns), including loading, error, and empty states, and a history view showing previous analyses for the logged-in user.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/backend.d.ts",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/analysis/AnalysisHistory.tsx",
+          "frontend/src/components/analysis/AnalysisDetailsDialog.tsx",
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/backend.d.ts",
+          "frontend/src/hooks/useQueries.ts",
+          "frontend/src/components/analysis/AnalysisHistory.tsx",
+          "frontend/src/components/analysis/AnalysisDetailsDialog.tsx",
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Add a prominent disclaimer in the UI stating the app provides informational analysis only and is not financial advice.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/Disclaimer.tsx",
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "frontend/src/components/Footer.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/Disclaimer.tsx",
+          "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+          "frontend/src/components/Footer.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Adopt a coherent new visual theme appropriate for a crypto analysis tool (avoid the current pink/purple/blue collectible-card aesthetic): a dark ‘trading terminal’ style with neutral grays and neon green/amber accents, consistent typography, and clear information hierarchy.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+          "frontend/src/components/analysis/AnalysisHistory.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/Header.tsx",
+          "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+          "frontend/src/components/analysis/AnalysisHistory.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Generate and include static brand assets for the new app (logo + simple icon) and render them from frontend static assets (not via the backend).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/crypto-short-logo.dim_512x512.png",
+          "frontend/public/assets/generated/crypto-short-icon.dim_128x128.png",
+          "frontend/src/components/Header.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/crypto-short-logo.dim_512x512.png",
+          "frontend/public/assets/generated/crypto-short-icon.dim_128x128.png",
+          "frontend/src/components/Header.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/frontend/canister.yaml",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/crypto-short-icon.dim_128x128.png",
+    "frontend/public/assets/generated/crypto-short-logo.dim_512x512.png",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/CardGrid.tsx",
+    "frontend/src/components/Disclaimer.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Header.tsx",
+    "frontend/src/components/PandaCardComponent.tsx",
+    "frontend/src/components/RandomCardModal.tsx",
+    "frontend/src/components/analysis/AnalysisDetailsDialog.tsx",
+    "frontend/src/components/analysis/AnalysisForm.tsx",
+    "frontend/src/components/analysis/AnalysisHistory.tsx",
+    "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+    "frontend/src/store/randomCardStore.ts",
+    "frontend/src/ui-summary.json",
+    "frontend/src/utils/ohlcvParser.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

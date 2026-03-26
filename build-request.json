@@ -1,0 +1,168 @@
+{
+  "kind": "build_request",
+  "title": "Replace Panda Cards app with a crypto short-analysis app (heuristic AI)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Replace the current “Panda Cards” product UI with a new app focused on analyzing cryptocurrencies for potential short opportunities, using English for all user-facing text.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App no longer shows panda card collection, random card modal, or panda-specific copy.",
+        "Primary navigation/header branding reflects the new crypto short-analysis purpose.",
+        "All visible text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create a new analysis workflow UI where a user can (a) enter a crypto identifier (e.g., symbol/name), (b) provide market data as pasted OHLCV rows or CSV text, and (c) run an analysis to produce a short/avoid short recommendation with a transparent score breakdown.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is a dedicated analysis form with inputs for asset identifier and pasted OHLCV/CSV data.",
+        "User can trigger an analysis and see a result panel with: recommendation (e.g., “Consider Short” / “Avoid Short”), overall confidence/score, and a breakdown of contributing signals.",
+        "The UI validates that the pasted data is parseable and shows a clear English error message when invalid."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement backend data models and endpoints for crypto analysis requests and results, including storing a per-user analysis history (keyed by caller principal) and returning the user’s past analyses.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes methods to: submit an analysis request (asset + OHLCV series) and receive an analysis result; list the caller’s saved analysis history; fetch a specific past analysis by id.",
+        "Analyses are stored per-caller and cannot be read by other principals.",
+        "Backend returns stable, deterministic results for the same input series (no randomness)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement the “AI analyze” logic as an on-canister heuristic scoring engine (no external LLM): compute common technical indicators from the provided OHLCV series (at minimum RSI and moving averages) and derive a short-opportunity score plus human-readable reasons.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Given an OHLCV series, backend computes RSI and at least one moving-average-based trend signal.",
+        "Backend outputs: overall score/confidence, recommendation label, and a list of English ‘reasons’ explaining which signals triggered.",
+        "If insufficient data length for indicators, backend returns a clear error describing the minimum required rows."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Connect the new frontend workflow to the backend using React Query (new hooks analogous to the existing query patterns), including loading, error, and empty states, and a history view showing previous analyses for the logged-in user.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Running an analysis shows a loading state, then renders the returned result.",
+        "Errors from backend are surfaced in a readable English message.",
+        "A history section lists prior analyses (asset, timestamp, recommendation/score) and allows viewing details."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Add a prominent disclaimer in the UI stating the app provides informational analysis only and is not financial advice.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Disclaimer text is visible in the main analysis experience (e.g., near results and/or footer).",
+        "Disclaimer is written in clear English and does not claim guaranteed outcomes."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Adopt a coherent new visual theme appropriate for a crypto analysis tool (avoid the current pink/purple/blue collectible-card aesthetic): a dark ‘trading terminal’ style with neutral grays and neon green/amber accents, consistent typography, and clear information hierarchy.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Header, buttons, and key metric highlights follow the new terminal-style palette (no dominant pink/purple/blue gradients).",
+        "Layouts prioritize readability of tables/metrics and analysis results.",
+        "Theme is applied consistently across analysis form, results, and history views."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Generate and include static brand assets for the new app (logo + simple icon) and render them from frontend static assets (not via the backend).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "i wanna create new app wich can help me to ai analyze crypto to short"
+        ]
+      },
+      "acceptanceCriteria": [
+        "New generated images are added under frontend/public/assets/generated and referenced directly in the UI.",
+        "Header displays the new logo/icon at appropriate sizes without layout shift."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui (compose them instead).",
+    "Do not integrate external LLM/AI services (analysis must be implemented locally as heuristic/indicator-based).",
+    "Use English for all user-facing text."
+  ],
+  "nonGoals": [
+    "No automated trade execution, brokerage exchange integration, or order placement.",
+    "No real-time streaming prices via WebSockets or push notifications.",
+    "No third-party authentication providers beyond Internet Identity.",
+    "No guarantee of profitability; the app must not present outputs as financial advice."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal crypto/short-analysis app logo mark, dark terminal style with neon green/amber accents (crypto-short-logo.dim_512x512.png)",
+      "Simple monochrome app icon symbol suitable for small sizes, terminal style (crypto-short-icon.dim_128x128.png)"
+    ],
+    "edits": []
+  }
+}

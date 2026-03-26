@@ -1,0 +1,84 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-16T03:22:32.807Z",
+  "summary": "Frontend UI for a crypto short-analysis workflow (form, results, history, details dialog, disclaimer, and dark terminal theme) is added, but the backend remains the original Panda Cards canister and the frontend currently uses mocked, in-memory analysis/history instead of calling deterministic on-canister heuristic analysis endpoints. Static generated brand image files are referenced but not shown as added in the diff summary.",
+  "missing_requirements": [
+    {
+      "id": "REQ-3",
+      "requirement": "Implement backend data models and endpoints for crypto analysis requests/results, including per-user history keyed by caller principal; expose methods to submit analysis, list history, and fetch analysis by id; ensure analyses are private per principal and deterministic.",
+      "reason": "backend/main.mo still defines PandaCard types/storage and exposes panda-card-related methods (getAllCards/getRandomCard/getCardById/etc.). No evidence of crypto analysis types, submit/list/get endpoints, or per-caller storage in the backend diff summary.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Implement on-canister heuristic scoring engine computing technical indicators (at minimum RSI and moving averages) and return score/confidence, recommendation, and English reasons; return clear error when insufficient rows.",
+      "reason": "No indicator/heuristic engine implementation is shown in backend/main.mo; instead it still contains panda card initialization and a random card method using randomness. The only 'analysis' logic visible is a frontend mockAnalysis based on price change, not RSI/MAs.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Connect the new frontend workflow to the backend using React Query, including loading/error/empty states, and a history view backed by the logged-in user’s canister-stored analyses.",
+      "reason": "React Query hooks exist, but they explicitly use a mockAnalysis function and local in-memory stores (latestAnalysisResult/analysisHistoryStore) with TODO comments to replace with backend calls. Therefore the workflow is not actually connected to backend endpoints nor backed by per-user canister history.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "requirement": "Generate and include static brand assets (logo + icon) under frontend/public/assets/generated and reference them in the UI.",
+      "reason": "UI references an icon path (/assets/generated/crypto-short-icon.dim_128x128.png), but the diff summary does not show the required image files being added under frontend/public/assets/generated (neither the icon nor the 512x512 logo).",
+      "evidence": [
+        "frontend/src/components/Header.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Frontend mock analysis engine and in-memory history store (latestAnalysisResult/analysisHistoryStore) instead of using backend canister methods.",
+      "reason": "BuildRequest requires backend-based deterministic heuristic analysis and per-user history stored in the canister; the diff implements a temporary client-side mock with TODOs rather than requested backend integration.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts"
+      ]
+    },
+    {
+      "description": "Backend migration module and migration wiring in the actor.",
+      "reason": "BuildRequest does not request a data migration feature; a new backend/migration.mo is added and referenced via '(with migration = Migration.run)' in backend/main.mo.",
+      "evidence": [
+        "backend/migration.mo",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CardGrid.tsx",
+    "frontend/src/components/Disclaimer.tsx",
+    "frontend/src/components/Footer.tsx",
+    "frontend/src/components/Header.tsx",
+    "frontend/src/components/PandaCardComponent.tsx",
+    "frontend/src/components/RandomCardModal.tsx",
+    "frontend/src/components/analysis/AnalysisDetailsDialog.tsx",
+    "frontend/src/components/analysis/AnalysisForm.tsx",
+    "frontend/src/components/analysis/AnalysisHistory.tsx",
+    "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+    "frontend/src/store/randomCardStore.ts",
+    "frontend/src/utils/ohlcvParser.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

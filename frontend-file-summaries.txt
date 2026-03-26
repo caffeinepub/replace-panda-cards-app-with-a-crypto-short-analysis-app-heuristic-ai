@@ -1,0 +1,20 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up dark theme and renders the crypto short analysis terminal with header, main page, and footer.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for crypto analysis operations with mock implementations until backend is updated (runAnalysis, analysisHistory, analysisById).",
+  "frontend/src/components/Header.tsx": "Header component with crypto analysis branding, logo icon, and terminal-style design.",
+  "frontend/src/components/Footer.tsx": "Footer with copyright, caffeine.ai attribution with UTM tracking, and financial disclaimer text.",
+  "frontend/src/components/CardGrid.tsx": "Grid layout component that displays all 100 panda cards with a user-friendly \"Preparing your collectible panda cards…\" loading message and proper error handling.",
+  "frontend/src/components/PandaCardComponent.tsx": "Individual panda card component with hover animations, glow effects, gradient backgrounds, rarity badges, and dynamic styling based on card properties using the correct 'type' property from AnimationParams.",
+  "frontend/src/components/RandomCardModal.tsx": "Modal dialog that displays a randomly selected panda card in an enlarged view with options to get another random card or close.",
+  "frontend/src/store/randomCardStore.ts": "Zustand store for managing the random card modal open/close state.",
+  "frontend/src/index.css": "Global styles with OKLCH color system customized for dark trading terminal theme with neutral grays and neon green/amber accents.",
+  "frontend/tailwind.config.js": "Tailwind configuration with terminal-style color palette, reduced border radius, and green/amber glow shadow utilities.",
+  "frontend/src/pages/CryptoShortAnalysisPage.tsx": "Main analysis page with tabbed interface for running new analyses and viewing history, includes disclaimer and result display.",
+  "frontend/src/components/analysis/AnalysisForm.tsx": "Form component for entering asset identifier and pasting OHLCV CSV data with validation and submission handling.",
+  "frontend/src/components/analysis/AnalysisResultPanel.tsx": "Displays analysis results including recommendation, confidence score, and detailed signal breakdown with color-coded indicators.",
+  "frontend/src/components/analysis/AnalysisHistory.tsx": "Table view of past analyses with clickable rows to view details, includes loading and empty states.",
+  "frontend/src/components/analysis/AnalysisDetailsDialog.tsx": "Modal dialog that displays full details of a selected past analysis including all signals and metrics.",
+  "frontend/src/components/Disclaimer.tsx": "Reusable disclaimer component with amber alert styling warning users that the tool is informational only and not financial advice.",
+  "frontend/src/utils/ohlcvParser.ts": "CSV/OHLCV data parser with comprehensive validation for format, numeric values, price relationships, and minimum data requirements.",
+  "frontend/src/backend.d.ts": "TypeScript interface definitions including existing panda card types and new crypto analysis types (AnalysisResult, AnalysisSummary, OHLCVDataPoint)."
+}

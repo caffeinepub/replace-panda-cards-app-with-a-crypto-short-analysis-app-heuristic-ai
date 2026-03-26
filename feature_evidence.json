@@ -1,0 +1,132 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-current-panda-cards-product-ui-with-a-new-app-focused-on-analyzing-cryptocurrencies-for-potential-short-opportunities-using-english-for-all-user-facing-text",
+      "featureTitle": "Replace the current “Panda Cards” product UI with a new app focused on analyzing cryptocurrencies for potential short opportunities, using English for all user-facing text.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/CardGrid.tsx",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/components/Header.tsx",
+        "frontend/src/components/PandaCardComponent.tsx",
+        "frontend/src/components/RandomCardModal.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/store/randomCardStore.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-new-analysis-workflow-ui-where-a-user-can-a-enter-a-crypto-identifier-e-g-symbol-name-b-provide-market-data-as-pasted-ohlcv-rows-or-csv-text-and-c-run-an-analysis-to-produce-a-short-avoid-short-recommendation-with-a-transparent-score-breakdown",
+      "featureTitle": "Create a new analysis workflow UI where a user can (a) enter a crypto identifier (e.g., symbol/name), (b) provide market data as pasted OHLCV rows or CSV text, and (c) run an analysis to produce a short/avoid short recommendation with a transparent score breakdown.",
+      "files": [
+        "frontend/src/components/analysis/AnalysisForm.tsx",
+        "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+        "frontend/src/pages/CryptoShortAnalysisPage.tsx",
+        "frontend/src/utils/ohlcvParser.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-connect-the-new-frontend-workflow-to-the-backend-using-react-query-new-hooks-analogous-to-the-existing-query-patterns-including-loading-error-and-empty-states-and-a-history-view-showing-previous-analyses-for-the-logged-in-user",
+      "featureTitle": "Connect the new frontend workflow to the backend using React Query (new hooks analogous to the existing query patterns), including loading, error, and empty states, and a history view showing previous analyses for the logged-in user.",
+      "files": [
+        "frontend/src/components/analysis/AnalysisDetailsDialog.tsx",
+        "frontend/src/components/analysis/AnalysisHistory.tsx",
+        "frontend/src/hooks/useQueries.ts",
+        "frontend/src/pages/CryptoShortAnalysisPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-prominent-disclaimer-in-the-ui-stating-the-app-provides-informational-analysis-only-and-is-not-financial-advice",
+      "featureTitle": "Add a prominent disclaimer in the UI stating the app provides informational analysis only and is not financial advice.",
+      "files": [
+        "frontend/src/components/Disclaimer.tsx",
+        "frontend/src/components/Footer.tsx",
+        "frontend/src/pages/CryptoShortAnalysisPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-adopt-a-coherent-new-visual-theme-appropriate-for-a-crypto-analysis-tool-avoid-the-current-pink-purple-blue-collectible-card-aesthetic-a-dark-trading-terminal-style-with-neutral-grays-and-neon-green-amber-accents-consistent-typography-and-clear-information-hierarchy",
+      "featureTitle": "Adopt a coherent new visual theme appropriate for a crypto analysis tool (avoid the current pink/purple/blue collectible-card aesthetic): a dark ‘trading terminal’ style with neutral grays and neon green/amber accents, consistent typography, and clear information hierarchy.",
+      "files": [
+        "frontend/src/components/Header.tsx",
+        "frontend/src/components/analysis/AnalysisHistory.tsx",
+        "frontend/src/components/analysis/AnalysisResultPanel.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-and-include-static-brand-assets-for-the-new-app-logo-simple-icon-and-render-them-from-frontend-static-assets-not-via-the-backend",
+      "featureTitle": "Generate and include static brand assets for the new app (logo + simple icon) and render them from frontend static assets (not via the backend).",
+      "files": [
+        "frontend/src/components/Header.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

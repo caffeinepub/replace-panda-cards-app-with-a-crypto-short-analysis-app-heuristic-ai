@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "AI-powered app to analyze cryptocurrencies and provide insights for shorting opportunities.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal crypto/short-analysis app logo mark, dark terminal style with neon green/amber accents (crypto-short-logo.dim_512x512.png)\n- Simple monochrome app icon symbol suitable for small sizes, terminal style (crypto-short-icon.dim_128x128.png)",
+  "existing_features": [
+    {
+      "id": "feature-replace-the-current-panda-cards-product-ui-with-a-new-app-focused-on-analyzing-cryptocurrencies-for-potential-short-opportunities-using-english-for-all-user-facing-text",
+      "title": "Replace the current “Panda Cards” product UI with a new app focused on analyzing cryptocurrencies for potential short opportunities, using English for all user-facing text.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-analysis-workflow-ui-where-a-user-can-a-enter-a-crypto-identifier-e-g-symbol-name-b-provide-market-data-as-pasted-ohlcv-rows-or-csv-text-and-c-run-an-analysis-to-produce-a-short-avoid-short-recommendation-with-a-transparent-score-breakdown",
+      "title": "Create a new analysis workflow UI where a user can (a) enter a crypto identifier (e.g., symbol/name), (b) provide market data as pasted OHLCV rows or CSV text, and (c) run an analysis to produce a short/avoid short recommendation with a transparent score breakdown.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-connect-the-new-frontend-workflow-to-the-backend-using-react-query-new-hooks-analogous-to-the-existing-query-patterns-including-loading-error-and-empty-states-and-a-history-view-showing-previous-analyses-for-the-logged-in-user",
+      "title": "Connect the new frontend workflow to the backend using React Query (new hooks analogous to the existing query patterns), including loading, error, and empty states, and a history view showing previous analyses for the logged-in user.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-prominent-disclaimer-in-the-ui-stating-the-app-provides-informational-analysis-only-and-is-not-financial-advice",
+      "title": "Add a prominent disclaimer in the UI stating the app provides informational analysis only and is not financial advice.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-adopt-a-coherent-new-visual-theme-appropriate-for-a-crypto-analysis-tool-avoid-the-current-pink-purple-blue-collectible-card-aesthetic-a-dark-trading-terminal-style-with-neutral-grays-and-neon-green-amber-accents-consistent-typography-and-clear-information-hierarchy",
+      "title": "Adopt a coherent new visual theme appropriate for a crypto analysis tool (avoid the current pink/purple/blue collectible-card aesthetic): a dark ‘trading terminal’ style with neutral grays and neon green/amber accents, consistent typography, and clear information hierarchy.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-include-static-brand-assets-for-the-new-app-logo-simple-icon-and-render-them-from-frontend-static-assets-not-via-the-backend",
+      "title": "Generate and include static brand assets for the new app (logo + simple icon) and render them from frontend static assets (not via the backend).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Build a new app that uses AI to analyze crypto markets and identify shorting opportunities.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Implement backend data models and endpoints for crypto analysis requests and results, including storing a per-user analysis history (keyed by caller principal) and returning the user’s past analyses.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Implement the “AI analyze” logic as an on-canister heuristic scoring engine (no external LLM): compute common technical indicators from the provided OHLCV series (at minimum RSI and moving averages) and derive a short-opportunity score plus human-readable reasons.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Replace Panda Cards app with a crypto short-analysis app (heuristic AI)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
